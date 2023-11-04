@@ -5,12 +5,7 @@ import re
 def filter_datum(fields: list, redaction: str, message: 
                  list, separator: str) -> str:
     """Filter the log info"""
-    print(message)
     for field in fields:
-        pattern = r'{}=(\S+)'.format(field)
-        print(pattern)
+        pattern = r'{}=([^;]+)'.format(field)
         replacement = '{}={}'.format(field, redaction)
-        message = re.sub(pattern, replacement, message)
-        print(field)
-        print(message)
-    return message
+    return re.sub(pattern, replacement, message)
