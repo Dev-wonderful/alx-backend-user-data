@@ -46,7 +46,10 @@ class BasicAuth(Auth):
         if (decoded_base64_authorization_header is None or
             not isinstance(decoded_base64_authorization_header, str)):  # noqa: E129
             return None, None
-        current_user: list = decoded_base64_authorization_header.split(':')
+        decoded_header = decoded_base64_authorization_header.replace(
+            ':', ' ', 1
+        )
+        current_user: list = decoded_header.split()
         if len(current_user) != 2:
             return None, None
 
