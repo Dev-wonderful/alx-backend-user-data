@@ -62,11 +62,14 @@ class BasicAuth(Auth):
             return None
 
         # find user and validate password
-        users = User.search({'email': user_email})
-        if len(users) == 0:
-            return None
-        user = users[0]
-        if user.is_valid_password(user_pwd) is False:
+        try:
+            users = User.search({'email': user_email})
+            if len(users) == 0:
+                return None
+            user = users[0]
+            if user.is_valid_password(user_pwd) is False:
+                return None
+        except KeyError:
             return None
 
         return user
