@@ -36,3 +36,16 @@ class BasicAuth(Auth):
             return utf8_str
         except base64.binascii.Error:
             return None
+
+    def extract_user_credentials(
+            self, decoded_base64_authorization_header: str
+    ) -> (str, str):
+        """get current user"""
+        if (decoded_base64_authorization_header is None or
+            not isinstance(decoded_base64_authorization_header, str)):  # noqa: E129
+            return None, None
+        current_user: list = decoded_base64_authorization_header.split(':')
+        if len(current_user) != 2:
+            return None, None
+
+        return tuple(current_user)
