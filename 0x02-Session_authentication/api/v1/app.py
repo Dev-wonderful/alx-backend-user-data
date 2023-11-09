@@ -23,8 +23,8 @@ auth_config = {
     'session_auth': SessionAuth()
 }
 auth_type = os.getenv('AUTH_TYPE')
-if auth_type:
-    auth = auth_config[auth_type]
+if auth_type in auth_config.keys():
+    auth = auth_config.get(auth_type)
 
 
 @app.before_request
@@ -38,7 +38,8 @@ def handle_before_request():
     ]
     if auth.require_auth(request.path, excluded_paths) is False:
         return
-    if auth.authorization_header(request) is None or auth.session_cookie(request) is None:  # noqa: E501
+    if auth.authorization_header(request) is None and auth.session_cookie(request) is None:  # noqa: E501
+        print("here")
         abort(401)
     request.current_user = auth.current_user(request)
     if request.current_user is None:
