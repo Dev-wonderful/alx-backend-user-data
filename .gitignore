@@ -1,3 +1,4 @@
 **pyc
 .DS_store
 .db_User.json
+.env
