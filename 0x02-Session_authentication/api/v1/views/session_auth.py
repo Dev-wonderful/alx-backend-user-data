@@ -8,7 +8,7 @@ import os
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
-def create_user() -> str:
+def login_user() -> str:
     """ POST /api/v1/auth_session/login
     JSON body:
       - email
