@@ -20,7 +20,7 @@ def login_user() -> str:
     data = None
     error_msg = None
     try:
-        data = request.form.get()
+        data = request.form
     except Exception as e:
         data = None
     if data is None:
