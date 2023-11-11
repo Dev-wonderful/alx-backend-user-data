@@ -19,16 +19,9 @@ def login_user() -> str:
     """
     data = None
     error_msg = None
-    try:
-        data = request.form
-        # print(f"data: {data}")
-        if len(data) == 0:
-            raise ValueError
-    except Exception as e:
-        data = None
-    if data is None:
-        error_msg = "Wrong format"
-    if error_msg is None and data.get("email", "") == "":
+    data = request.form
+
+    if data.get("email", "") == "":
         error_msg = "email missing"
     if error_msg is None and data.get("password", "") == "":
         error_msg = "password missing"
