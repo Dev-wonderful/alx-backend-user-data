@@ -21,6 +21,9 @@ def login_user() -> str:
     error_msg = None
     try:
         data = request.form
+        # print(f"data: {data}")
+        if len(data) == 0:
+            raise ValueError
     except Exception as e:
         data = None
     if data is None:
