@@ -48,3 +48,12 @@ def login_user() -> str:
         except Exception as e:
             error_msg = "Can't login the user: {}".format(e)
     return jsonify({'error': error_msg}), 400
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+def logout():
+    """Log out a logged in user"""
+    from api.v1.app import auth
+    if auth.destroy_session(request):
+        return jsonify({}), 200
+    abort(404)
