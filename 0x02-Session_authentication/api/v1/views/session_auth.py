@@ -19,39 +19,5 @@ def login_user() -> str:
     """
     data = None
     error_msg = None
-    try:
-        data = request.form
-        # print(f"data: {data}")
-        if len(data) == 0:
-            raise ValueError
-    except Exception as e:
-        data = None
-    if data is None:
-        error_msg = "Wrong format"
-    if error_msg is None and data.get("email", "") == "":
-        error_msg = "email missing"
-    if error_msg is None and data.get("password", "") == "":
-        error_msg = "password missing"
-    if error_msg is None:
-        try:
-            user_email: str = data.get("email")
-            user_password: str = data.get("password")
-            result: list = User.search({'email': user_email})
-            if len(result) == 0:
-                return (
-                    jsonify({"error": "no user found for this email"}), 404
-                )
-            user: User = result[0]
-            if user.is_valid_password(user_password) is False:
-                return (
-                    jsonify({"error": "wrong password"}), 401
-                )
-            # create session ID
-            from api.v1.app import auth
-            session_id = auth.create_session(user.id)
-            response = jsonify(user.to_json())
-            response.set_cookie(os.getenv('SESSION_NAME'), session_id)
-            return response
-        except Exception as e:
-            error_msg = "Can't login the user: {}".format(e)
+    
     return jsonify({'error': error_msg}), 400
