@@ -50,7 +50,8 @@ def login_user() -> str:
             from api.v1.app import auth
             session_id = auth.create_session(user.id)
             response = jsonify(user.to_json())
-            return response.set_cookie(os.getenv('SESSION_NAME'), session_id)
+            response.set_cookie(os.getenv('SESSION_NAME'), session_id)
+            return response
         except Exception as e:
             error_msg = "Can't login the user: {}".format(e)
     return jsonify({'error': error_msg}), 400
