@@ -50,7 +50,8 @@ def login_user() -> str:
     return jsonify({'error': error_msg}), 400
 
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
 def logout():
     """Log out a logged in user"""
     from api.v1.app import auth
