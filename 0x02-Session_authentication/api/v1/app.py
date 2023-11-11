@@ -41,7 +41,7 @@ def run_before_every_request():
     ]
     if auth.require_auth(request.path, excluded_paths) is False:
         return
-    if auth.authorization_header(request) is None:  # noqa: E501
+    if auth.authorization_header(request) is None and auth.session_cookie(request) is None:  # noqa: E501
         # print("here")
         abort(401)
     request.current_user = auth.current_user(request)

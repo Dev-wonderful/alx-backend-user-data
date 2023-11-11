@@ -24,7 +24,7 @@ class SessionAuth(Auth):
         return self.user_id_by_session_id.get(session_id, None)
 
     def current_user(self, request=None):
-        """Get the surrent user"""
+        """Get the current user"""
         if request is None:
             return None
         # get session and user ID
