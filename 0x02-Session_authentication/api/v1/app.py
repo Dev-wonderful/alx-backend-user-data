@@ -8,6 +8,7 @@ from api.v1.auth.auth import Auth
 from api.v1.auth.basic_auth import BasicAuth
 from api.v1.auth.session_auth import SessionAuth
 from api.v1.auth.session_exp_auth import SessionExpAuth
+from api.v1.auth.session_db_auth import SessionDBAuth
 from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
 from typing import Union
@@ -18,12 +19,13 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 # print(os.environ)
-auth: Union[str, Auth, BasicAuth, SessionAuth] = None
+auth: Union[str, Auth, BasicAuth, SessionAuth, SessionDBAuth] = None
 auth_config = {
     'auth': Auth(),
     'basic_auth': BasicAuth(),
     'session_auth': SessionAuth(),
-    'session_exp_auth': SessionExpAuth()
+    'session_exp_auth': SessionExpAuth(),
+    'session_db_auth': SessionDBAuth()
 }
 auth_type = os.getenv('AUTH_TYPE')
 if auth_type in auth_config.keys():
