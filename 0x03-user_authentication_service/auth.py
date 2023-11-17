@@ -28,3 +28,14 @@ class Auth:
             return new_user
         # if there's a result for the email then raise value errorregister
         raise ValueError(f"User {email} already exists")
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """Check for valid login credentials"""
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return False
+        pwd_bytes = password.encode()
+        if bcrypt.checkpw(pwd_bytes, user.hashed_password) is True:
+            return True
+        return False
