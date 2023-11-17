@@ -42,7 +42,7 @@ class DB:
         session.commit()
         return new_user
 
-    def find_user_by(self, *args, **kwargs) -> Union[User, None]:
+    def find_user_by(self, *args, **kwargs) -> User:
         """find user by certain attributes"""
         session = self._session
         try:
@@ -55,7 +55,7 @@ class DB:
             raise NoResultFound
         return result
 
-    def update_user(self, user_id, *args, **kwargs) -> None:
+    def update_user(self, user_id: int, *args, **kwargs) -> None:
         """find user by certain attributes"""
         session = self._session
         try:
