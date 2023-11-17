@@ -87,7 +87,7 @@ def reset_password():
     return jsonify({"email": f"{email}", "reset_token": f"{reset_token}"})
 
 
-@app.route("/update_password", methods=["POST"])
+@app.route("/update_password", methods=["PUT"])
 def update_password():
     """reset token for password reset"""
     data = request.form
