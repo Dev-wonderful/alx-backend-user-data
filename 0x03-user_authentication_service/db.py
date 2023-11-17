@@ -65,4 +65,4 @@ class DB:
             if getattr(user, attribute, None) is None:
                 raise ValueError
             setattr(user, attribute, value)
-        return
+        return None
