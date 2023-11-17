@@ -84,22 +84,22 @@ def reset_password():
         reset_token = AUTH.get_reset_password_token(email)
     except ValueError:
         abort(403)
-    return jsonify({"email": f"{email}", "reset_token": f"{reset_token}"})
+    return jsonify({"email": f"{email}", "reset_token": f"{reset_token}"}), 200
 
 
-@app.route("/update_password", methods=["PUT"])
+@app.route("/reset_password", methods=["PUT"])
 def update_password():
     """reset token for password reset"""
     data = request.form
     email = data.get("email", None)
-    password = data.get("password", None)
+    new_password = data.get("new_password", None)
     reset_token = data.get("reset_token", None)
 
     try:
-        reset_token = AUTH.update_password(reset_token, password)
+        reset_token = AUTH.update_password(reset_token, new_password)
     except ValueError:
         abort(403)
-    return jsonify({"email": f"{email}", "message": "Password updated"})
+    return jsonify({"email": f"{email}", "message": "Password updated"}), 200
 
 
 if __name__ == "__main__":
