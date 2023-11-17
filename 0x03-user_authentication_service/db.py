@@ -44,9 +44,10 @@ class DB:
 
     def find_user_by(self, *args, **kwargs):
         """find user by certain attributes"""
-        session = self.__session
+        session = self._session
         try:
             # print(kwargs)
+            print(session)
             result = session.query(User).filter_by(**kwargs).first()
         except InvalidRequestError:
             raise InvalidRequestError
