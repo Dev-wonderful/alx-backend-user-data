@@ -57,12 +57,15 @@ class DB:
     def update_user(self, user_id, *args, **kwargs):
         """find user by certain attributes"""
         session = self.__session
-        user = session.query(User).filter_by(id=user_id).first()
-        # print(user)
-        if user is None:
-            raise NoResultFound
+        try:
+            user = self.find_user_by(id=user_id)
+            # print(user)
+        except NoResultFound:
+            raise ValueError
+
         for attribute, value in kwargs.items():
             if getattr(user, attribute, None) is None:
                 raise ValueError
             setattr(user, attribute, value)
+            session.commit()
         return None
