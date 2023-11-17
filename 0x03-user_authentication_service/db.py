@@ -47,7 +47,6 @@ class DB:
         session = self._session
         try:
             # print(kwargs)
-            print(session)
             result = session.query(User).filter_by(**kwargs).first()
         except InvalidRequestError:
             raise InvalidRequestError
