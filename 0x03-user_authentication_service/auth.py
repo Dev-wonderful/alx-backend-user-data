@@ -26,5 +26,5 @@ class Auth:
             hashed_password = _hash_password(password)
             new_user = self._db.add_user(email, hashed_password)
             return new_user
-        # if there's a result for the email then raise value error
+        # if there's a result for the email then raise value errorregister
         raise ValueError(f"User {email} already exists")
