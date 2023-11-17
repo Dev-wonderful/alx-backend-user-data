@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
-
+from typing import Union
 from user import Base, User
 
 
@@ -42,7 +42,7 @@ class DB:
         session.commit()
         return new_user
 
-    def find_user_by(self, *args, **kwargs):
+    def find_user_by(self, *args, **kwargs) -> Union[User, None]:
         """find user by certain attributes"""
         session = self._session
         try:
@@ -55,7 +55,7 @@ class DB:
             raise NoResultFound
         return result
 
-    def update_user(self, user_id, *args, **kwargs):
+    def update_user(self, user_id, *args, **kwargs) -> None:
         """find user by certain attributes"""
         session = self._session
         try:
