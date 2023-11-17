@@ -57,7 +57,7 @@ class DB:
 
     def update_user(self, user_id, *args, **kwargs):
         """find user by certain attributes"""
-        session = self.__session
+        session = self._session
         try:
             user = self.find_user_by(id=user_id)
             # print(user)
