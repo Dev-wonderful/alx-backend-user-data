@@ -28,6 +28,10 @@ def filter_datum(fields: List[str], redaction: str, message:
     return message
 
 
+def get_logger() -> logging.Logger:
+    """Get active logger"""
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
